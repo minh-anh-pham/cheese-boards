@@ -28,24 +28,19 @@ beforeEach(async () => {
     await testBoards[0].addCheeses(testCheeses[2]);
     await testBoards[2].addCheeses(testCheeses[2]);
 
-    return testCheeses, testBoards;
+    return Board, Cheese;
 })
 
 describe("many-to-many relationship", () => {
-    test("junction table exists", async () => {
-        expect(db.models.Board_Cheese).toBeTruthy();
-    })
 
-    test("junction table has correct relationships", async () => {
-        const board1 = await Board.findOne({where: {type: "type1"}});
-        const board1Cheeses = await board1.getCheeses();
+    test("verify board can be loaded with its cheeses", async () => {
+        const allCheeses = await Board.findAll({
+            include: Cheese
+        })
 
-        const board3 = await Board.findOne({where: {type: "type3"}});
-        const board3Cheeses = await board3.getCheeses();
-
-        expect(board1Cheeses[0].title).toEqual("title2");
-        expect(board1Cheeses[1].title).toContain("title3");
-        expect(board3Cheeses[0].title).toEqual("title3");
+        expect(allCheeses[0].Cheeses[0].title).toEqual("title2");
+        expect(allCheeses[0].Cheeses[1].title).toEqual("title3");
+        expect(allCheeses[2].Cheeses[0].title).toEqual("title3");
     })
 
 })
