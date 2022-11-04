@@ -63,7 +63,3 @@ describe("remove existing user", () => {
         expect(testUser.length).toEqual(0);
     })
 })
-
-afterEach(async () => {
-
-})
