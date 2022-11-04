@@ -14,7 +14,7 @@ beforeEach(async () => {
     });
 
     testBoard = await Board.findAll();
-    console.log(testBoard);
+
     return testBoard;
 })
 
