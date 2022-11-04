@@ -33,17 +33,25 @@ describe("one-to-many relationship", () => {
     })
 
     test("correct number of boards", async () => {
-        let anotherOne = await Board.create({
-            type: "testType1",
-            description: "testDescription1",
-            rating: 2.0
-        })
+        let twoMore = await Board.bulkCreate([
+            {
+                type: "testType1",
+                description: "testDescription1",
+                rating: 2.0
+            },
+            {
+                type: "testType2",
+                description: "testDescription2",
+                rating: 2.5
+            }
+        ])
 
-        await anotherOne.setUser(testUser);
+        //await twoMore[0].setUser(testUser);
+        await testUser.addBoards(twoMore);
 
         const count = await testUser.countBoards();
 
-        expect(count).toEqual(2);
+        expect(count).toEqual(3);
     })
 
 })
