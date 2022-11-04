@@ -47,6 +47,7 @@ describe("update existing user", () => {
         })
 
         testUser = await User.findAll();
+        console.log(testUser);
 
         expect(testUser[0].name).toEqual("test1");
     })
@@ -61,4 +62,8 @@ describe("remove existing user", () => {
 
         expect(testUser.length).toEqual(0);
     })
+})
+
+afterEach(async () => {
+
 })

@@ -5,8 +5,9 @@ class Board extends Model {};
 
 Board.init({
     id: {
-        type: DataTypes.TEXT,
-        primaryKey: true
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
     type: {
         type: DataTypes.TEXT,
